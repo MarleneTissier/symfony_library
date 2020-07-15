@@ -13,9 +13,17 @@ class AuthorController extends AbstractController{
     /**
      * @Route("/", name="accueil")
      */
-    public function accueil(){
-        return $this->render('accueil.html.twig');
+    public function accueil(AuthorRepository $authorRepository, BookRepository $bookRepository){
+
+        $books = $bookRepository ->findBy([], ['id'=>'DESC'],  3);
+        $authors = $authorRepository ->findBy([], ['id'=>'DESC'],  3);
+
+        return $this->render('accueil.html.twig', [
+            'books' => $books,
+            'authors' => $authors
+        ]);
     }
+
 
     //la on va appeler la méthode qui consistera à envoyer le contenu de la table authors à la page
     //concernée en faisant appelle à la BDD
