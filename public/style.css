@@ -75,8 +75,20 @@ h1{
     text-decoration: none;
     color: #C82829;
 }
-
-
+/*la page search*/
+.content_search{
+    padding: 2%;
+}
+.result{
+    display: flex;
+    justify-content: space-around;
+}
+.result .book{
+    margin-right: 2%;
+}
+.empty{
+    padding: 11% 0;
+}
 /*le footer : */
 footer{
     height: 15vh;

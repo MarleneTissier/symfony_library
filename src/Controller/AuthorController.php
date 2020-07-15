@@ -5,6 +5,8 @@ use App\Repository\AuthorRepository;
 use App\Repository\BookRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
+
 
 class AuthorController extends AbstractController{
     //l'accueil
@@ -74,11 +76,31 @@ class AuthorController extends AbstractController{
     }
 
     //je recherche les livres selon un mot que j'ai entré
+    //on reserve les wildcart pour les valeurs simple (id, nom...)
+    //ici on utilise plutot les request pour rechercher des chaines de caractères
+    //avec les class BookRepository et Request on demande à symfony d'instancier notre
+    // en les passant en parametre : c'est appelé convoyeur
     /**
-     * @route("/books/search/resume", name="book_search_result")
+     * @route("/books/search/resume", name="search_result")
      */
-    public function SearchBookByResum(BookRepository $bookRepository)
+    public function SearchByResum(
+        BookRepository $bookRepository,
+        Request $request)
     {
-        $bookRepository->BookFindByResum();
+        //utiliser la class request pour récup la valeur ds l'url qui est envoyée par le formulaire
+        $word = $request->query->get('search');
+        //initialiser la variable books
+        $books=[];
+        //voir si la variable est vide ou non
+        if (!empty($word)){
+            //si elle n'est pas vide, renvoyer le résultat fourni par la méthode BookFindByResum
+            //présent dans le repository $bookRepository
+            $books=$bookRepository->BookFindByResum($word);
+        }
+        //appeler le fichier twig avec le résulta de la recherche donné par la méthode
+        return $this->render('search.html.twig', [
+          'books'=>$books
+        ]);
+
     }
 }

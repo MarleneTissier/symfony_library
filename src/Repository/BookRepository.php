@@ -48,22 +48,22 @@ class BookRepository extends ServiceEntityRepository
     }
     */
 
-    public function BookFindByResum(){
-        //on récupère un mot
-        $word ='découvre';
-        //on appelle le QueryBuilder
+    public function BookFindByResum($word){
+        //on récupère le mot
+        //createQueryBuilder permet de récupérer le constructeur de requete SQL
         $queryBuilder = $this->createQueryBuilder('book');
         //récupérer le mot entré dans la BDD et faire de la sécurité
         $query = $queryBuilder->select('book')
+            //la requete SQL avec une clause WHERE et le placeholder correspondant
             ->where('book.resume LIKE :word')
+            //la sécurité pour empecher les injections SQL en remplaçant le placeholder par
+            //la vraie valeur
             ->setParameter('word', '%'.$word.'%')
+            //on récupère le résultat
             ->getQuery();
         //on attribut à une variable le résultat de la commande précédante
-        $book = $query->getResult();
-        //un dump pour voir le résulta
-        dump($book);
-        die;
+        $books = $query->getResult();
         //on retourne le résulta
-        return $book;
+        return $books;
     }
 }
