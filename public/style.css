@@ -1,0 +1,85 @@
+body{
+    margin: 0;
+    background-color: dimgray;
+    position: relative;
+}
+
+/*le header : */
+header{
+    background-color: #222222;
+    text-align: center;
+    padding: 3%;
+}
+.nav_barre{
+    text-align: center;
+    justify-content: space-around;
+    display: flex;
+    list-style: none;
+    margin-bottom: 0;
+}
+.nav_barre li {
+   margin-right: 5%;
+}
+.nav_barre li a{
+    text-decoration: none;
+    color: darkgray;
+    font-size: larger;
+}
+
+/*les généralités : */
+h1{
+    color: darkgray;
+    margin-bottom: 4%;
+}
+.page_title h2{
+    font-size: 6vh;
+    margin-bottom: 0;
+}
+.content{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.page_title{
+    text-align: center;
+    color: #dfdfdf;
+}
+
+/*accueil*/
+.accueil h2, p{
+    color: #dfdfdf;
+    text-align: center;
+}
+
+/*les livres et les auteurs*/
+.authors, .book_genre, .books, .book, .author{
+    width: 25%;
+    margin: 2%;
+    border: #222222 2px solid;
+    border-radius: 19%;
+    padding: 1%;
+}
+.book, .book_genre,.author{
+    text-align: center;
+    text-decoration: none;
+    color: #dfdfdf;
+    margin: 6% 0 15% 0;
+}
+.authors a, .books a, .book_genre a{
+    text-align: center;
+    text-decoration: none;
+    color: #dfdfdf;
+}
+.authors a:hover, .book_genre a:hover, .books a:hover{
+    text-align: center;
+    text-decoration: none;
+    color: #C82829;
+}
+
+
+/*le footer : */
+footer{
+    height: 15vh;
+    background-color: #222222;
+
+}
