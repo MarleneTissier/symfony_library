@@ -16,6 +16,7 @@ header{
     display: flex;
     list-style: none;
     margin-bottom: 0;
+    padding: 2%;
 }
 .nav_barre li {
    margin-right: 5%;
@@ -104,6 +105,12 @@ h3{
 .empty{
     padding: 11% 0;
 }
+.form_search{
+    padding: 5%;
+    position: relative;
+    width: 30%;
+    margin: auto;
+}
 /*les pages d'ajout*/
 .blocFormAjout{
     padding: 5%;
@@ -133,13 +140,18 @@ input[type=button] {
     height: 200px;
 }
 
+
 /*admin*/
 .boutton{
     display: flex;
 }
-.boutton_auteur{
+.button_delete{
     margin: auto;
-}
+}.button_delete a{
+    text-decoration: none;
+    color: #222222;
+ }
+
 /*le footer : */
 footer{
     height: 15vh;

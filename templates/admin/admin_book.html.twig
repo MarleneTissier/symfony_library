@@ -9,7 +9,7 @@
             <!--les info du livre-->
             <p>type : {{ book.genre }} - {{ book.nbPages }} pages</p>
             <div class="boutton">
-                <button class="boutton_auteur" name="button_delete">supprimer le livre</button>
+                <button class="button_delete" name="button_delete" type="submit" formmethod="get"><a href="{{path('delete_admin_books', {'id':book.id}) }}">supprimer le livre</a></button>
             </div>
         </div>
     </div>

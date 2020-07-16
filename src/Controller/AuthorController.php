@@ -140,6 +140,7 @@ class AuthorController extends AbstractController{
         $entityManager-> persist($newBook);
         $entityManager-> flush();
     }
+
     /**
      * @Route("/newBook", name="newBook")
      */
@@ -165,9 +166,9 @@ class AuthorController extends AbstractController{
         $entityManager->flush();
     }
     /**
-     * @route("/delete_book", name="delete_book")
+     * @route("/update_author/{id}", name="update_author")
      */
-    public function delete_book (BookRepository $bookRepository, EntityManagerInterface $entityManager){
+    public function update_author (BookRepository $bookRepository, EntityManagerInterface $entityManager){
         //on récupère le livre avec une entité que l'on place dans une variable
         $book = $bookRepository->find(18);
         //avec entity manager, on remove le livre
