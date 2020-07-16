@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block content %}
 
-    <div class="content"><
+    <div class="content">
         <div class="author">
             <!--le nom/prenom de l'auteur de l'auteur-->
                 <h2>{{ author.firstname }} {{ author.lastname }}</h2>
@@ -16,6 +16,5 @@
                         <p>{{ author.birthdate|date('d-M-Y') }} / {{ author.deathdate|date('d-M-Y') }}</p>
                     {% endif %}
         </div>
-    /div>
 
 {% endblock content %}

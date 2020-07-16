@@ -1,8 +1,10 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\Book;
 use App\Repository\AuthorRepository;
 use App\Repository\BookRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,6 +26,7 @@ class AuthorController extends AbstractController{
         ]);
     }
 
+//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
     //la on va appeler la méthode qui consistera à envoyer le contenu de la table authors à la page
     //concernée en faisant appelle à la BDD
@@ -50,6 +53,8 @@ class AuthorController extends AbstractController{
         ]);
     }
 
+//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
     //on créé la liste de livre qui doit apparaitre
     /**
      * @Route("/books", name="books_list")
@@ -71,6 +76,8 @@ class AuthorController extends AbstractController{
         ]);
     }
 
+//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
     //je recherche les livres selon le genre horreur
     /**
      * @Route("/books/{genre}", name="booksGenre")
@@ -82,6 +89,8 @@ class AuthorController extends AbstractController{
             'books'=>$booksGenre
         ]);
     }
+
+//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
     //je recherche les livres selon un mot que j'ai entré
     //on reserve les wildcart pour les valeurs simple (id, nom...)
@@ -110,5 +119,48 @@ class AuthorController extends AbstractController{
           'books'=>$books
         ]);
 
+    }
+
+//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+    /**
+     * @route("/setter", name="setter")
+     */
+    public function setterEnDur(EntityManagerInterface $entityManager){
+        // je créé une nouvelle instance de l'entité Book
+        $newBook = new book();
+        // je lui donne les valeurs des colonnes avec les setters
+        $newBook -> setTitle('Simetierre');
+        $newBook -> setGenre('horreur');
+        $newBook -> setNbPages(373);
+        $newBook -> setResume('Jeune médecin de Chicago, Louis Creed, son épouse Rachel, sa fille Ellie et son fils Gage emménagent à Ludlow, petite bourgade du Maine. En poste à l\'université locale, Louis fait également la connaissance de Judson Crandall, son voisin octogénaire qui deviendra son meilleur ami. Au cours d\'une promenade, Judson fait découvrir à la famille Creed le « Simetierre », un cimetière d\'animaux où des générations d\'enfants ont enterré leur animal de compagnie préféré...');
+        // j'utilise l'entityManager pour que Doctrine m'enregistre le livre créé avec la méthode persist()
+        // puis je "valide" l'enregistrement avec la méthode flush()
+        $entityManager-> persist($newBook);
+        $entityManager-> flush();
+    }
+    /**
+     * @Route("/newBook", name="newBook")
+     */
+    public function newBook(AuthorRepository $authorRepository){
+        return $this->render('newBook.html.twig');
+    }
+    /**
+     * @Route("/newAuthor", name="newAuthor")
+     */
+    public function newAuthor(AuthorRepository $authorRepository){
+        return $this->render('newAuthor.html.twig');
+    }
+    /**
+     * @route("/update", name="update_book")
+     */
+    public function update_book(BookRepository $bookRepository, EntityManagerInterface $entityManager){
+        //on récupère le livre selon l'id
+        $book = $bookRepository->find(['id'=> 1]);
+        //on change son titre
+        $book->setTitle('Carrie');
+        //on pousse l'update dans la BDD
+        $entityManager->persist($book);
+        $entityManager->flush();
     }
 }
