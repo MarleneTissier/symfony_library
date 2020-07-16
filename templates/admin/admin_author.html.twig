@@ -1,0 +1,21 @@
+{% extends 'admin/admin_base.html.twig' %}
+{% block content %}
+    <div class="content">
+    <div class="author">
+        <!--le nom/prenom de l'auteur de l'auteur-->
+        <h2>{{ author.firstname }} {{ author.lastname }}</h2>
+
+        <!--la biographie de l'auteur-->
+        <p>{{ author.biography }}</p>
+
+        <!--afficher la date de naissance / mort de l'auteur-->
+        {% if author.deathdate==null %}
+            <p>{{ author.birthdate|date('d-M-Y') }}</p>
+        {% else %}
+            <p>{{ author.birthdate|date('d-M-Y') }} / {{ author.deathdate|date('d-M-Y') }}</p>
+        {% endif %}
+        <div class="boutton">
+            <button class="button_delete" name="button_delete" type="submit" formmethod="get"><a href="{{path('delete_admin_author', {'id':author.id}) }}">supprimer l'auteur</a></button>
+        </div>
+    </div>
+{% endblock %}

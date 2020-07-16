@@ -1,0 +1,66 @@
+{% extends 'admin/admin_base.html.twig' %}
+{% block content %}
+    <div class="content">
+        <div class="accueil">
+            <h2>Bienvenu sur la bibliothèque Admin</h2>
+            <div class="prez">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, eaque, omnis. Adipisci corporis culpa ducimus ex, illum incidunt nesciunt nihil optio possimus quasi quibusdam, quidem tempora temporibus vel, voluptatem voluptatum.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid assumenda error et itaque labore necessitatibus obcaecati, quidem quis? Accusantium aliquid amet at laboriosam libero placeat quaerat quasi quidem quos ullam!
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab, animi assumenda corporis cum dolorum eos eveniet hic id illo ipsa maxime minus nemo nesciunt nobis provident ratione saepe voluptas.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis delectus dolorem ducimus harum id, libero praesentium quis reprehenderit! Aliquam dolorum, error impedit inventore libero nulla qui quidem reiciendis repellendus voluptatum?</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium alias aut deleniti deserunt eveniet ex maxime pariatur quaerat, quibusdam quis repellendus similique tempora voluptas. Delectus dicta ex incidunt obcaecati porro?
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aspernatur cupiditate dicta error, ex, ipsum minima minus molestiae nemo neque nostrum odit officiis porro rem repellat, repudiandae totam vel voluptatem!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, assumenda beatae, delectus deserunt distinctio dolore eaque eos eum explicabo fugit inventore ipsam neque nostrum nulla porro sapiente tempore ut veritatis.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut dicta doloribus eveniet fuga odit quae quaerat quibusdam unde! Accusamus aperiam autem deserunt, dolorum illum iste laudantium molestias placeat temporibus totam.</p>
+            </div>
+        </div>
+    </div>
+    <div class="last_authors">
+        <h3>les derniers auteurs</h3>
+        <div class="last_author">
+
+            {% for author in authors %}
+                <div class="authors">
+
+                    <a href="{{ path('author_show', {'id':author.id}) }}">
+
+                        <!--le nom/prenom de l'auteur de l'auteur-->
+                        <h2>{{ author.firstname }} {{ author.lastname }}</h2>
+
+                        <!--la biographie de l'auteur-->
+                        <p>{{ author.biography }}</p>
+
+                        <!--afficher la date de naissance / mort de l'auteur-->
+                        {% if author.deathdate==null %}
+                            <p>{{ author.birthdate|date('d-M-Y') }}</p>
+                        {% else %}
+                            <p>{{ author.birthdate|date('d-M-Y') }} / {{ author.deathdate|date('d-M-Y') }}</p>
+                        {% endif %}
+                    </a>
+
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+    <div class="last_books">
+        <h3>Les derniers livres</h3>
+        <div class="last_book">
+
+            {% for book in books %}
+
+                <div class="books">
+                    <a href="{{ path('book_show', {'id':book.id}) }}">
+                        <!--le titre du livre-->
+                        <h2>{{ book.title }}</h2>
+                        <!--les info du livre-->
+                        <p>type : {{ book.genre }} - {{ book.nbPages }} pages</p>
+                    </a>
+                </div>
+
+            {% endfor %}
+
+        </div>
+    </div>
+
+{% endblock %}
