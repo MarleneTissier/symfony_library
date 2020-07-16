@@ -177,5 +177,6 @@ class AuthorController extends AbstractController{
         dump('livre supprimé');
         die;
     }
+
 }
 
