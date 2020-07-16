@@ -141,7 +141,7 @@ class AuthorController extends AbstractController{
         $entityManager-> flush();
     }
     /**
-     * @Route("/newBook", name="new_Book")
+     * @Route("/newBook", name="newBook")
      */
     public function new_Book(AuthorRepository $authorRepository){
         return $this->render('newBook.html.twig');
