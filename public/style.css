@@ -78,6 +78,7 @@ h3{
     text-decoration: none;
     color: #dfdfdf;
     margin: 6% 0 15% 0;
+    width: 40%;
 }
 .authors a, .books a, .book_genre a{
     text-align: center;
@@ -132,7 +133,13 @@ input[type=button] {
     height: 200px;
 }
 
-
+/*admin*/
+.boutton{
+    display: flex;
+}
+.boutton_auteur{
+    margin: auto;
+}
 /*le footer : */
 footer{
     height: 15vh;

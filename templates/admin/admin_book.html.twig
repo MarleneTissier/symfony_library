@@ -1,0 +1,16 @@
+{% extends 'admin/admin_base.html.twig' %}
+{% block content %}
+    <div class="content">
+        <div class="book">
+            <!--le titre du livre-->
+            <h2>{{ book.title }}</h2>
+            <!--le resume du livre-->
+            <p>{{ book.resume }}</p>
+            <!--les info du livre-->
+            <p>type : {{ book.genre }} - {{ book.nbPages }} pages</p>
+            <div class="boutton">
+                <button class="boutton_auteur" name="button_delete">supprimer le livre</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}

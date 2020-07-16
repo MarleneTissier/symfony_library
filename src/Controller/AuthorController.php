@@ -144,13 +144,13 @@ class AuthorController extends AbstractController{
      * @Route("/newBook", name="newBook")
      */
     public function new_Book(AuthorRepository $authorRepository){
-        return $this->render('newBook.html.twig');
+        return $this->render('admin_newBook.html.twig');
     }
     /**
      * @Route("/newAuthor", name="newAuthor")
      */
     public function newAuthor(AuthorRepository $authorRepository){
-        return $this->render('newAuthor.html.twig');
+        return $this->render('admin_newAuthor.html.twig');
     }
     /**
      * @route("/update_book", name="update_book")
