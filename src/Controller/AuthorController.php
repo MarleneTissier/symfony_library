@@ -5,6 +5,7 @@ use App\Entity\Book;
 use App\Repository\AuthorRepository;
 use App\Repository\BookRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use http\Env\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -124,25 +125,25 @@ class AuthorController extends AbstractController{
 //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
     /**
-     * @route("/setter", name="setter")
+     * @route("/setter_book", name="setter_book")
      */
-    public function setterEnDur(EntityManagerInterface $entityManager){
+    public function setter_book_endur(EntityManagerInterface $entityManager){
         // je créé une nouvelle instance de l'entité Book
         $newBook = new book();
         // je lui donne les valeurs des colonnes avec les setters
-        $newBook -> setTitle('Simetierre');
+        $newBook -> setTitle('test');
         $newBook -> setGenre('horreur');
         $newBook -> setNbPages(373);
-        $newBook -> setResume('Jeune médecin de Chicago, Louis Creed, son épouse Rachel, sa fille Ellie et son fils Gage emménagent à Ludlow, petite bourgade du Maine. En poste à l\'université locale, Louis fait également la connaissance de Judson Crandall, son voisin octogénaire qui deviendra son meilleur ami. Au cours d\'une promenade, Judson fait découvrir à la famille Creed le « Simetierre », un cimetière d\'animaux où des générations d\'enfants ont enterré leur animal de compagnie préféré...');
+        $newBook -> setResume('resume test');
         // j'utilise l'entityManager pour que Doctrine m'enregistre le livre créé avec la méthode persist()
         // puis je "valide" l'enregistrement avec la méthode flush()
         $entityManager-> persist($newBook);
         $entityManager-> flush();
     }
     /**
-     * @Route("/newBook", name="newBook")
+     * @Route("/newBook", name="new_Book")
      */
-    public function newBook(AuthorRepository $authorRepository){
+    public function new_Book(AuthorRepository $authorRepository){
         return $this->render('newBook.html.twig');
     }
     /**
@@ -152,15 +153,29 @@ class AuthorController extends AbstractController{
         return $this->render('newAuthor.html.twig');
     }
     /**
-     * @route("/update", name="update_book")
+     * @route("/update_book", name="update_book")
      */
     public function update_book(BookRepository $bookRepository, EntityManagerInterface $entityManager){
-        //on récupère le livre selon l'id
-        $book = $bookRepository->find(['id'=> 1]);
+        //on récupère le livre selon l'id en placant dans la variable une entité
+        $book = $bookRepository->find(1);
         //on change son titre
         $book->setTitle('Carrie');
         //on pousse l'update dans la BDD
         $entityManager->persist($book);
         $entityManager->flush();
     }
+    /**
+     * @route("/delete_book", name="delete_book")
+     */
+    public function delete_book (BookRepository $bookRepository, EntityManagerInterface $entityManager){
+        //on récupère le livre avec une entité que l'on place dans une variable
+        $book = $bookRepository->find(18);
+        //avec entity manager, on remove le livre
+        $entityManager->remove($book);
+        $entityManager->flush();
+        //on envois un message de confirmation
+        dump('livre supprimé');
+        die;
+    }
 }
+
