@@ -20,7 +20,7 @@
         <li><a href="{{ path('authors_list') }}">les auteurs</a></li>
         <li><a href="{{ path('books_list') }}">les livres</a></li>
         <li><a href="{{ path('search_result') }}">recherche</a></li>
-        <li><a href="{{ path('Admin/base.html.twig') }}">se connecter</a></li>
+        <li><a href="{{ path('../base.html.twig') }}">se déconnecter</a></li>
     </ul>
 </header>
 
@@ -33,10 +33,7 @@
 
 <!--le footer-->
 <footer>
-    <ul class="nav_barre">
-        <li><a href="{{ path('newAuthor') }}">Ajouter un Auteur</a></li>
-        <li><a href="{{ path('newBook') }}">Ajouter un Livre</a></li>
-    </ul>
+
 </footer>
 </body>
 </html>
