@@ -10,6 +10,7 @@
             <p>type : {{ book.genre }} - {{ book.nbPages }} pages</p>
             <div class="boutton">
                 <button class="button_delete" name="button_delete" type="submit" formmethod="get"><a href="{{path('delete_admin_books', {'id':book.id}) }}">supprimer le livre</a></button>
+                <button class="button_update" name="button_update" type="submit" formmethod="get"><a href="{{path('update_admin_book', {'id':book.id}) }}">modifier le livre</a></button>
             </div>
         </div>
     </div>

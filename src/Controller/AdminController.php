@@ -6,6 +6,7 @@
     use App\Form\BookType;
     use App\Entity\Author;
     use App\Form\AuthorType;
+    use App\Repository\AuthorRepository;
     use App\Repository\BookRepository;
     use Doctrine\ORM\EntityManagerInterface;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -129,7 +130,6 @@ class AdminController extends AbstractController
         $book = $bookRepository->find($id);
         $entityManager->remove($book);
         $entityManager->flush();
-
         return $this->redirectToRoute('admin_books');
     }
 
@@ -167,7 +167,7 @@ class AdminController extends AbstractController
         $bookForm->handleRequest($request);
         //si le formulaire a ete envoyé et que les données sont valides...
         if ($bookForm->isSubmitted()&&$bookForm->isValid()){
-            //... alors je persist le livre
+            //... alors je persist et flush le livre
             $entityManager->persist($book);
             $entityManager->flush();
         }
@@ -194,6 +194,66 @@ class AdminController extends AbstractController
         }
         return $this->render('admin/formulaire_author.html.twig', [
             'authorForm'=>$authorForm->createView()
+        ]);
+    }
+
+    /**
+     * @route("/update_admin_book/{id}", name="update_admin_book")
+     */
+    public function update_admin_book(
+        Request $request,
+        BookRepository $bookRepository,
+        EntityManagerInterface $entityManager,
+        $id
+    ){
+        //une nouvelle instance
+        //dans laquelle on attribut le livre trouvé selon l'id
+        $book = $bookRepository->find($id);
+        //recupération du gabarit de formulaire
+        //créé avec la commande make:form que je stock dans une variable
+        $bookFormUpdate=$this->createForm(BookType::class, $book);
+        //je prends les données de la requete et je les envois au formulaire
+        $bookFormUpdate->handleRequest($request);
+        //si le formulaire a ete envoyé et que les données sont valides...
+        if ($bookFormUpdate->isSubmitted() && $bookFormUpdate->isValid()){
+            //... alors je persist et flush le livre
+            $entityManager->persist($book);
+            $entityManager->flush();
+            return $this->redirectToRoute('admin_books');
+        }
+        //je renvois le fichier twig
+        return $this->render( 'admin/update_admin_book.html.twig', [
+            'blocFormUpdate'=>$bookFormUpdate->createView()
+        ]);
+    }
+
+    /**
+     * @route("/update_admin_author/{id}", name="update_admin_author")
+     */
+    public function update_admin_author(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        AuthorRepository $authorRepository,
+        $id
+    ){
+        //une nouvelle instance
+        //dans laquelle on attribut le livre trouvé selon l'id
+        $author = $authorRepository->find($id);
+        //recupération du gabarit de formulaire
+        //créé avec la commande make:form que je stock dans une variable
+        $authorFormUpdate=$this->createForm(AuthorType::class, $author);
+        //je prends les données de la requete et je les envois au formulaire
+        $authorFormUpdate->handleRequest($request);
+        //si le formulaire a ete envoyé et que les données sont valides...
+        if ($authorFormUpdate->isSubmitted() && $authorFormUpdate->isValid()){
+            //... alors je persist et flush le livre
+            $entityManager->persist($author);
+            $entityManager->flush();
+            return $this->redirectToRoute('admin_authors');
+        }
+        //je renvois le fichier twig
+        return $this->render( 'admin/update_admin_author.html.twig', [
+            'blocFormUpdate'=>$authorFormUpdate->createView()
         ]);
     }
 }

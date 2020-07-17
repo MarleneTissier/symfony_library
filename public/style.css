@@ -112,7 +112,7 @@ h3{
     margin: auto;
 }
 /*les pages d'ajout*/
-.blocFormAjout{
+.blocFormAjout, .blocForm{
     padding: 5%;
     position: relative;
     width: 45%;
@@ -144,13 +144,17 @@ input[type=button] {
 /*admin*/
 .boutton{
     display: flex;
+    margin-bottom: 10%;
+    justify-content: space-around;
 }
-.button_delete{
-    margin: auto;
-}.button_delete a{
+.button_delete a{
     text-decoration: none;
     color: #222222;
  }
+.button_update a{
+    text-decoration: none;
+    color: #222222;
+}
 
 /*le footer : */
 footer{

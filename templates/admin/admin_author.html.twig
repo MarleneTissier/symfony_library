@@ -16,6 +16,7 @@
         {% endif %}
         <div class="boutton">
             <button class="button_delete" name="button_delete" type="submit" formmethod="get"><a href="{{path('delete_admin_author', {'id':author.id}) }}">supprimer l'auteur</a></button>
+            <button class="button_update" name="button_update" type="submit" formmethod="get"><a href="{{path('update_admin_author', {'id':author.id}) }}">modifier l'auteur</a></button>
         </div>
     </div>
 {% endblock %}
