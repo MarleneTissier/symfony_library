@@ -236,24 +236,17 @@ class AdminController extends AbstractController
         AuthorRepository $authorRepository,
         $id
     ){
-        //une nouvelle instance
-        //dans laquelle on attribut le livre trouvé selon l'id
         $author = $authorRepository->find($id);
-        //recupération du gabarit de formulaire
-        //créé avec la commande make:form que je stock dans une variable
         $authorFormUpdate=$this->createForm(AuthorType::class, $author);
-        //je prends les données de la requete et je les envois au formulaire
         $authorFormUpdate->handleRequest($request);
-        //si le formulaire a ete envoyé et que les données sont valides...
         if ($authorFormUpdate->isSubmitted() && $authorFormUpdate->isValid()){
-            //... alors je persist et flush le livre
             $entityManager->persist($author);
             $entityManager->flush();
             return $this->redirectToRoute('admin_authors');
         }
-        //je renvois le fichier twig
         return $this->render( 'admin/update_admin_author.html.twig', [
             'blocFormUpdate'=>$authorFormUpdate->createView()
         ]);
     }
 }
+

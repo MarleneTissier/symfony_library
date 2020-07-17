@@ -2,11 +2,42 @@
 {% block content %}
 
     {# afficher le formulaire
-    #}
     <div class="blocFormAjout">
         {{ form(authorForm) }}
     </div>
-
+    #}
+    <div class="form">
+        {{ form_start (authorForm) }}
+            <div class="author_firstname">
+                {{ form_label(authorForm.firstname) }}
+                {{ form_widget(authorForm.firstname, {'attr': {'class': 'input_firstname'}}) }}
+                {{ form_errors(authorForm.firstname)}}
+            </div>
+            <div class="author_lastname">
+                {{ form_label(authorForm.lastname) }}
+                {{ form_widget(authorForm.lastname, {'attr': {'class': 'input_lastname'}}) }}
+                {{ form_errors(authorForm.lastname)}}
+            </div>
+            <div class="author_biographie">
+                {{ form_label(authorForm.biography) }}
+                {{ form_widget(authorForm.biography, {'attr': {'class': 'input_biography'}}) }}
+                {{ form_errors(authorForm.biography)}}
+            </div>
+            <div class="author_publish">
+                {{ form_label(authorForm.published) }}
+                {{ form_widget(authorForm.published, {'attr': {'class': 'input_published'}}) }}
+            </div>
+            <div class="author_birthday">
+                {{ form_label(authorForm.birthdate) }}
+                {{ form_widget(authorForm.birthdate, {'attr': {'class': 'input_birthday'}}) }}
+                {{ form_errors(authorForm.birthdate)}}
+            </div>
+            <div class="author_deathday">
+                {{ form_label(authorForm.deathdate) }}
+                {{ form_widget(authorForm.deathdate, {'attr': {'class': 'input_deathday'}}) }}
+            </div>
+        {{ form_end(authorForm) }}
+    </div>
 {% endblock %}
 
 

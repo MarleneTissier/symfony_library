@@ -2,9 +2,33 @@
 {% block content %}
 
     {# afficher le formulaire
-    #}
     <div class="blocForm">
         {{ form(blocFormUpdate) }}
+    </div>
+    #}
+    <div class="form">
+        {{ form_start (blocFormUpdate) }}
+        <div class="book_titre">
+            {{ form_label(blocFormUpdate.title) }}
+            {{ form_widget(blocFormUpdate.title, {'attr': {'class': 'input_title'}}) }}
+            {{ form_errors(blocFormUpdate.title)}}
+        </div>
+        <div class="book_nb_pages">
+            {{ form_label(blocFormUpdate.nbPages) }}
+            {{ form_widget(blocFormUpdate.nbPages, {'attr': {'class': 'input_nb_pages'}}) }}
+            {{ form_errors(blocFormUpdate.nbPages)}}
+        </div>
+        <div class="book_genreForm">
+            {{ form_label(blocFormUpdate.genre) }}
+            {{ form_widget(blocFormUpdate.genre, {'attr': {'class': 'input_genre'}}) }}
+            {{ form_errors(blocFormUpdate.genre)}}
+        </div>
+        <div class="book_resume">
+            {{ form_label(blocFormUpdate.resume) }}
+            {{ form_widget(blocFormUpdate.resume, {'attr': {'class': 'input_resume'}}) }}
+            {{ form_errors(blocFormUpdate.resume)}}
+        </div>
+        {{ form_end(blocFormUpdate) }}
     </div>
 
 {% endblock %}

@@ -2,9 +2,34 @@
 {% block content %}
 
     {# afficher le formulaire
-    #}
     <div class="blocFormAjout">
         {{ form(bookForm) }}
+    </div>
+    #}
+
+    <div class="form">
+        {{ form_start (bookForm) }}
+            <div class="book_titre">
+                {{ form_label(bookForm.title) }}
+                {{ form_widget(bookForm.title, {'attr': {'class': 'input_title'}}) }}
+                {{ form_errors(bookForm.title)}}
+            </div>
+            <div class="book_nb_pages">
+                {{ form_label(bookForm.nbPages) }}
+                {{ form_widget(bookForm.nbPages, {'attr': {'class': 'input_nb_pages'}}) }}
+                {{ form_errors(bookForm.nbPages)}}
+            </div>
+            <div class="book_genreForm">
+                {{ form_label(bookForm.genre) }}
+                {{ form_widget(bookForm.genre, {'attr': {'class': 'input_genre'}}) }}
+                {{ form_errors(bookForm.genre)}}
+            </div>
+            <div class="book_resume">
+                {{ form_label(bookForm.resume) }}
+                {{ form_widget(bookForm.resume, {'attr': {'class': 'input_resume'}}) }}
+                {{ form_errors(bookForm.resume)}}
+            </div>
+        {{ form_end(bookForm) }}
     </div>
 
 {% endblock %}

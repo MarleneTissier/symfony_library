@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\AuthorRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=AuthorRepository::class)
@@ -19,16 +20,19 @@ class Author
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "Merci d'entrer le prénom de l'auteur !")
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "Merci d'entrer le nom de l'auteur !")
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="text", length=500)
+     * @Assert\NotBlank(message = "Merci de parler un peu de sa vie !")
      */
     private $biography;
 
@@ -39,6 +43,7 @@ class Author
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotBlank(message = "Merci d'indiquer sa date de naissance!")
      */
     private $birthdate;
 

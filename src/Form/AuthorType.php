@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Author;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,8 +18,15 @@ class AuthorType extends AbstractType
             ->add('lastname')
             ->add('biography')
             ->add('published')
-            ->add('birthdate')
-            ->add('deathdate')
+            ->add('birthdate', DateType::class, [
+                'widget' => 'single_text',
+                'label' => 'Date de naissance'
+            ])
+            ->add('deathdate', DateType::class, [
+                'widget' => 'single_text',
+                'label' => 'Date de mort',
+                'required'=> false
+            ])
             ->add('submit', SubmitType::class)
         ;
     }
