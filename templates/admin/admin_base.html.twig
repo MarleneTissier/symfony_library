@@ -1,42 +1,42 @@
 <!doctype html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{{ asset('style.css') }}">
-    <title>Document</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="{{ asset('style.css') }}">
+        <title>Document</title>
 
-</head>
-<body>
+    </head>
+    <body>
 
-<!--le header-->
-<header>
-    <h1>Sombre Librairie</h1>
-    <!--la barre de navigation-->
-    <ul class="nav_barre">
-        <li><a href="{{ path('admin_accueil') }}">l'accueil</a></li>
-        <li><a href="{{ path('admin_authors') }}">les auteurs</a></li>
-        <li><a href="{{ path('admin_books') }}">les livres</a></li>
-        <li><a href="{{ path('admin_search_result') }}">recherche</a></li>
-        <li><a href="{{ path('accueil') }}">se déconnecter</a></li>
-    </ul>
-</header>
+        <!--le header-->
+        <header>
+            <h1>Sombre Librairie</h1>
+            <!--la barre de navigation-->
+            <ul class="nav_barre">
+                <li><a href="{{ path('admin_accueil') }}">l'accueil</a></li>
+                <li><a href="{{ path('admin_authors') }}">les auteurs</a></li>
+                <li><a href="{{ path('admin_books') }}">les livres</a></li>
+                <li><a href="{{ path('admin_search_result') }}">recherche</a></li>
+                <li><a href="{{ path('accueil') }}">se déconnecter</a></li>
+            </ul>
+        </header>
 
-<!--le contenu-->
-<div class="main">
-    {% block content %}
+        <!--le contenu-->
+        <div class="main">
+            {% block content %}
 
-    {% endblock content%}
-</div>
+            {% endblock content%}
+        </div>
 
-<!--le footer-->
-<footer>
-    <ul class="nav_barre">
-        <li><a href="{{ path('admin_author_formulaire') }}">Ajouter un Auteur</a></li>
-        <li><a href="{{ path('admin_book_formulaire') }}">Ajouter un Livre</a></li>
-    </ul>
-</footer>
-</body>
+        <!--le footer-->
+        <footer>
+            <ul class="nav_barre">
+                <li><a href="{{ path('formulaire_author') }}">ajouter un auteur</a></li>
+                <li><a href="{{ path('formulaire_book') }}">ajouter un livre</a></li>
+            </ul>
+        </footer>
+    </body>
 </html>

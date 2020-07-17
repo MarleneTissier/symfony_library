@@ -4,11 +4,13 @@
 
     use App\Entity\Book;
     use App\Form\BookType;
-    use App\Repository\AuthorRepository;
+    use App\Entity\Author;
+    use App\Form\AuthorType;
     use App\Repository\BookRepository;
     use Doctrine\ORM\EntityManagerInterface;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use Symfony\Component\HttpFoundation\Request;
+    use Symfony\Component\HttpFoundation\Response;
     use Symfony\Component\Routing\Annotation\Route;
 
 class AdminController extends AbstractController
@@ -148,45 +150,50 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('admin_authors');
     }
 
-
     /**
-     * @Route("/admin_book_formulaire"), name="admin_book_formulaire")
+     * @route("/formulaire_book", name="formulaire_book")
      */
-    public function admin_book_formulaire(
+    public function formulaire_book(
         Request $request,
         EntityManagerInterface $entityManager
     )
     {
+        //nouvelle instance
         $book = new Book();
+        //recupération du gabarit de formulaire
+        //créé avec la commande make:form que je stock dans une variable
         $bookForm=$this->createForm(BookType::class, $book);
+        //je prends les données de la requete et je les envois au formulaire
         $bookForm->handleRequest($request);
+        //si le formulaire a ete envoyé et que les données sont valides...
         if ($bookForm->isSubmitted()&&$bookForm->isValid()){
+            //... alors je persist le livre
             $entityManager->persist($book);
             $entityManager->flush();
         }
+        //je renvois le fichier twig
         return $this->render('admin/formulaire_book.html.twig', [
             'bookForm'=>$bookForm->createView()
         ]);
     }
 
     /**
-     * @Route("/admin_author_formulaire"), name="admin_author_formulaire")
+     * @Route("/formulaire_author", name="formulaire_author")
      */
-    public function admin_author_formulaire(
+    public function formulaire_author(
         Request $request,
         EntityManagerInterface $entityManager
     )
     {
         $author = new Author();
-        $authorForm=$this->createForm(BookType::class, $author);
+        $authorForm=$this->createForm(AuthorType::class, $author);
         $authorForm->handleRequest($request);
         if ($authorForm->isSubmitted()&&$authorForm->isValid()){
             $entityManager->persist($author);
             $entityManager->flush();
         }
         return $this->render('admin/formulaire_author.html.twig', [
-            'bookForm'=>$authorForm->createView()
+            'authorForm'=>$authorForm->createView()
         ]);
     }
-
 }
