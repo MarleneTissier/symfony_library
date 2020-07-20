@@ -28,6 +28,13 @@ header{
 }
 
 /*les généralités : */
+.message{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    color: #dfdfdf;
+    text-decoration-line: underline;
+}
 h1{
     color: darkgray;
     margin-bottom: 4%;

@@ -130,6 +130,7 @@ class AdminController extends AbstractController
         $book = $bookRepository->find($id);
         $entityManager->remove($book);
         $entityManager->flush();
+        $this->addFlash('success', 'Votre livre a été supprimé !');
         return $this->redirectToRoute('admin_books');
     }
 
@@ -146,7 +147,7 @@ class AdminController extends AbstractController
         $autor = $authorRepository->find($id);
         $entityManager->remove($autor);
         $entityManager->flush();
-
+        $this->addFlash('success', 'Votre auteur a été supprimé !');
         return $this->redirectToRoute('admin_authors');
     }
 
@@ -170,6 +171,8 @@ class AdminController extends AbstractController
             //... alors je persist et flush le livre
             $entityManager->persist($book);
             $entityManager->flush();
+            $this->addFlash('success', 'Votre livre a été créé !');
+            return $this->redirectToRoute('admin_books');
         }
         //je renvois le fichier twig
         return $this->render('admin/formulaire_book.html.twig', [
@@ -191,6 +194,8 @@ class AdminController extends AbstractController
         if ($authorForm->isSubmitted()&&$authorForm->isValid()){
             $entityManager->persist($author);
             $entityManager->flush();
+            $this->addFlash('success', 'Votre auteur a été ajouté !');
+            return $this->redirectToRoute('admin_authors');
         }
         return $this->render('admin/formulaire_author.html.twig', [
             'authorForm'=>$authorForm->createView()
@@ -219,6 +224,7 @@ class AdminController extends AbstractController
             //... alors je persist et flush le livre
             $entityManager->persist($book);
             $entityManager->flush();
+            $this->addFlash('success', 'Votre livre a été mis à jour !');
             return $this->redirectToRoute('admin_books');
         }
         //je renvois le fichier twig
@@ -242,6 +248,7 @@ class AdminController extends AbstractController
         if ($authorFormUpdate->isSubmitted() && $authorFormUpdate->isValid()){
             $entityManager->persist($author);
             $entityManager->flush();
+            $this->addFlash('success', 'Votre auteur a été mis à jour !');
             return $this->redirectToRoute('admin_authors');
         }
         return $this->render( 'admin/update_admin_author.html.twig', [

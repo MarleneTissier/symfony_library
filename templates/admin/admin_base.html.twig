@@ -10,7 +10,6 @@
 
     </head>
     <body>
-
         <!--le header-->
         <header>
             <h1>Sombre Librairie</h1>
@@ -26,6 +25,14 @@
 
         <!--le contenu-->
         <div class="main">
+            <div class="message">
+                {% for message in app.flashes('success') %}
+
+                    <h2>{{ message }}</h2>
+
+                {% endfor %}
+            </div>
+
             {% block content %}
 
             {% endblock content%}
