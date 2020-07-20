@@ -8,13 +8,16 @@
     use App\Form\AuthorType;
     use App\Repository\AuthorRepository;
     use App\Repository\BookRepository;
+    use App\Repository\GenreRepository;
     use Doctrine\ORM\EntityManagerInterface;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
     use Symfony\Component\Routing\Annotation\Route;
+    use Symfony\Component\Validator\Constraints as Assert;
+    use function Symfony\Component\String\b;
 
-class AdminController extends AbstractController
+    class AdminController extends AbstractController
 {
 
     //pour aller sur la page accueil ;
@@ -255,5 +258,26 @@ class AdminController extends AbstractController
             'blocFormUpdate'=>$authorFormUpdate->createView()
         ]);
     }
+
+    /**
+     * @route "/admin/book/inserttwitchgenre" name="InsertBookGenre"
+     */
+    public function InsertBookGenre(GenreRepository $genreRepository, EntityManagerInterface $entityManager){
+
+        $genre = $genreRepository->find(2);
+
+        $book = new (book);
+        $book = settitle('titre 1');
+        $book = setResume('bla bla');
+        $book = setNbPzges (526);
+        $book = setgenre ($genre);
+
+        $entityManager= persist($genre);
+        $entityManager = flush();
+
+
+
+    }
+
 }
 

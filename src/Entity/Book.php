@@ -36,6 +36,13 @@ class Book
      */
     private $resume;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=genre::class, inversedBy="books")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $genre;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -81,4 +88,17 @@ class Book
     {
         return $this->resume;
     }
+
+    public function getGenre(): ?genre
+    {
+        return $this->genre;
+    }
+
+    public function setGenre(?genre $genre): self
+    {
+        $this->genre = $genre;
+
+        return $this;
+    }
+
 }
