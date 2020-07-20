@@ -37,7 +37,7 @@ class Book
     private $resume;
 
     /**
-     * @ORM\ManyToOne(targetEntity=genre::class, inversedBy="books")
+     * @ORM\ManyToOne(targetEntity=Genre::class, inversedBy="books")
      * @ORM\JoinColumn(nullable=false)
      */
     private $genre;
