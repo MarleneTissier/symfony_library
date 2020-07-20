@@ -53,6 +53,14 @@ class Author
     private $deathdate;
 
     /**
+     * @ORM\ManyToOne(targetEntity=book::class, inversedBy="authors")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $book_id;
+
+
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -164,5 +172,18 @@ class Author
         $this->deathdate = $deathdate;
     }
 
+    public function getBookId(): ?book
+    {
+        return $this->book_id;
+    }
+
+    public function setBookId(?book $book_id): self
+    {
+        $this->book_id = $book_id;
+
+        return $this;
+    }
+
+   
 
 }
