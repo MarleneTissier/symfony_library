@@ -282,5 +282,30 @@
         return new Response('livre enregistré');
     }
 
+        /**
+         * @Route("/admin/author/inserBookAuthor", name="InsertBookAuthor")
+         */
+        public function InsertBookAuthor(
+            BookRepository $bookRepository,
+            EntityManagerInterface $entityManager
+        ){
+
+            $book = $bookRepository->find(2);
+
+            $author = new Author();
+            $date = "01-09-2015";
+
+            $author-> setFirstname('Max');
+            $author->setLastname('benois');
+            $author->setBirthdate(\DateTime::createFromFormat('d-m-Y', $date));
+            $author->setBiography("pas grand chose a dire");
+            $author->setPublished(false);
+            $author->setBook($book);
+            $entityManager->persist($author);
+            $entityManager->flush();
+
+            return new Response('auteur enregistré');
+        }
+
 }
 
