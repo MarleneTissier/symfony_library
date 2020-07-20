@@ -260,23 +260,26 @@
     }
 
     /**
-     * @route "/admin/book/inserttwitchgenre" name="InsertBookGenre"
+     * @Route("/admin/book/insertwithgenre", name="InsertBookGenre")
      */
-    public function InsertBookGenre(GenreRepository $genreRepository, EntityManagerInterface $entityManager){
+    public function InsertBookGenre(
+        GenreRepository $genreRepository,
+        EntityManagerInterface $entityManager
+    ){
 
         $genre = $genreRepository->find(2);
 
-        $book = new (book);
-        $book = settitle('titre 1');
-        $book = setResume('bla bla');
-        $book = setNbPzges (526);
-        $book = setgenre ($genre);
+        $book = new Book();
 
-        $entityManager= persist($genre);
-        $entityManager = flush();
+        $book->setTitle('blabla tome 3');
+        $book->setNbPages(256);
+        $book->setResume('bla bla bla');
+        $book->setGenre($genre);
 
+        $entityManager->persist($book);
+        $entityManager->flush();
 
-
+        return new Response('livre enregistré');
     }
 
 }
