@@ -122,17 +122,7 @@
     }
 
     //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-    //je recherche les livres selon leur genre
-    /**
-     * @Route("/admin/books/{genre}", name="AdminBooksGenre")
-     */
-    public function AdminBooksGenre(BookRepository $bookRepository, $genre){
-        $booksGenre = $bookRepository->findBy(['genre'=> $genre]);
-        return $this->render('admin_books_genre.html.twig', [
-            'genre'=>$genre,
-            'books'=>$booksGenre
-        ]);
-    }
+
     //je recherche les livres selon leur genre
     /**
      * @Route("/admin/books/{name}", name="AdminSearchBooksGenre")
@@ -149,7 +139,7 @@
         $books = $bookRepository->findBy(['genre'=> $genre]);
 
         //on retourne les infos récupérées
-        return $this->render('admin_books_genre.html.twig', [
+        return $this->render('admin/admin_books_genre.html.twig', [
             'genre'=>$genre,
             'books'=>$books
         ]);
