@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Author;
 use App\Entity\Book;
 use App\Entity\Genre;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -20,6 +21,10 @@ class BookType extends AbstractType
             ->add('genre', EntityType::class, [
                 'class'=> Genre::class,
                 'choice_label'=>'name'
+            ])
+            ->add('author', EntityType::class, [
+                'class'=> Author::class,
+                'choice_label'=>'lastname'
             ])
             ->add('resume')
             ->add('submit', SubmitType::class)

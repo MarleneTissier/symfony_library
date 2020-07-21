@@ -24,17 +24,20 @@
     /**
      * @Route("/admin", name="admin_accueil")
      */
-    public function admin_accueil(AuthorRepository $authorRepository, BookRepository $bookRepository)
+    public function admin_accueil(AuthorRepository $authorRepository, BookRepository $bookRepository, GenreRepository $genreRepository)
     {
 
         $books = $bookRepository->findBy([], ['id' => 'DESC'], 3);
         $authors = $authorRepository->findBy([], ['id' => 'DESC'], 3);
+        $genres = $genreRepository->findBy([], ['id' => 'DESC']);
 
         return $this->render('admin/admin_accueil.html.twig', [
             'books' => $books,
-            'authors' => $authors
+            'authors' => $authors,
+            'genres' => $genres
         ]);
     }
+
 
     //pour aller sur la page de validation d'opération ;
 
@@ -118,6 +121,19 @@
         ]);
     }
 
+    //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    //je recherche les livres selon leur genre
+    /**
+     * @Route("/admin/books/{genre}", name="AdminBooksGenre")
+     */
+    public function AdminBooksGenre(BookRepository $bookRepository, $genre){
+        $booksGenre = $bookRepository->findBy(['genre'=> $genre]);
+        return $this->render('admin_books_genre.html.twig', [
+            'genre'=>$genre,
+            'books'=>$booksGenre
+        ]);
+    }
+    //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
     //pour aller sur la page de suppression de livre ;
 

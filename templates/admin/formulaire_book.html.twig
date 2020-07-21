@@ -25,6 +25,11 @@
                 {{ form_widget(bookForm.genre, {'attr': {'class': 'input_genre'}}) }}
                 {{ form_errors(bookForm.genre)}}
             </div>
+            <div class="book_author">
+                {{ form_label(bookForm.author) }}
+                {{ form_widget(bookForm.author, {'attr': {'class': 'input_author'}}) }}
+                {{ form_errors(bookForm.author)}}
+            </div>
             <div class="book_resume">
                 {{ form_label(bookForm.resume) }}
                 {{ form_widget(bookForm.resume, {'attr': {'class': 'input_resume'}}) }}

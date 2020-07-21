@@ -49,12 +49,19 @@ class Book
      */
     private $authors;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=author::class, inversedBy="books")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
+
+    /*
     public function __construct()
     {
         $this->authors = new ArrayCollection();
     }
+     */
 
-    
     public function getId(): ?int
     {
         return $this->id;
@@ -140,6 +147,18 @@ class Book
                 $author->setBook(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAuthor(): ?author
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?author $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }

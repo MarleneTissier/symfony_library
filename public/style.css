@@ -17,6 +17,7 @@ header{
     list-style: none;
     margin-bottom: 0;
     padding: 2%;
+    margin-top: 0;
 }
 .nav_barre li {
    margin-right: 5%;
@@ -26,7 +27,11 @@ header{
     color: darkgray;
     font-size: larger;
 }
-
+.listGenre{
+    text-decoration: none;
+    color: darkgray;
+    font-size: larger;
+}
 /*les généralités : */
 .message{
     text-align: center;
@@ -34,6 +39,27 @@ header{
     justify-content: center;
     color: #dfdfdf;
     text-decoration-line: underline;
+}
+.block{
+    display: flex;
+}
+.barre{
+    width: 120%;
+    background-color: #484747;
+}
+.genresList{
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    color: #dfdfdf;
+    font-size: large;
+    font-family: Amiri;
+}
+.genresList a {
+    text-decoration: none;
+    color: #dfdfdf;
+    font-size: large;
+    font-family: Amiri;
 }
 h1{
     color: darkgray;

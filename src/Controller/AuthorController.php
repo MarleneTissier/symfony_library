@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Entity\Book;
 use App\Repository\AuthorRepository;
 use App\Repository\BookRepository;
+use App\Repository\GenreRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use http\Env\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,14 +17,16 @@ class AuthorController extends AbstractController{
     /**
      * @Route("/", name="accueil")
      */
-    public function accueil(AuthorRepository $authorRepository, BookRepository $bookRepository){
+    public function accueil(AuthorRepository $authorRepository, BookRepository $bookRepository, GenreRepository $genreRepository){
 
         $books = $bookRepository ->findBy([], ['id'=>'DESC'],  3);
         $authors = $authorRepository ->findBy([], ['id'=>'DESC'],  3);
+        $genres = $genreRepository->findBy([], ['id' => 'DESC']);
 
         return $this->render('accueil.html.twig', [
             'books' => $books,
-            'authors' => $authors
+            'authors' => $authors,
+            'genres' => $genres
         ]);
     }
 
@@ -79,16 +82,34 @@ class AuthorController extends AbstractController{
 
 //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
-    //je recherche les livres selon le genre horreur
+    //je recherche les livres selon leur genre
     /**
-     * @Route("/books/{genre}", name="booksGenre")
+     * @Route("/books/{name}", name="booksGenre")
      */
-    public function booksGenre(BookRepository $bookRepository, $genre){
-        $booksGenre = $bookRepository->findBy(['genre'=> $genre]);
+    public function booksGenre(
+        GenreRepository $genreRepository,
+        BookRepository $bookRepository,
+        $name
+    ){
+        //on récupère les livres selon le genre que l'on a entrée
+        //ici on récupère un seul genre avec findOneBy
+        $genre = $genreRepository ->findOneBy(['name'=> $name]);
+        //ici on récupère plusieurs livres qui correspondent au genre récupéré
+        $books = $bookRepository->findBy(['genre'=> $genre]);
+
+        //on retourne les infos récupérées
         return $this->render('books_genre.html.twig', [
             'genre'=>$genre,
-            'books'=>$booksGenre
+            'books'=>$books
         ]);
+    }
+
+    //je recherche les livres selon une liste des genres
+    /**
+     * @Route("/books/genrefind", name="allBooksGenre")
+     */
+    public function allBooksGenre(){
+        return $this->render('books_genre.html.twig');
     }
 
 //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
