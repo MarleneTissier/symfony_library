@@ -133,6 +133,27 @@
             'books'=>$booksGenre
         ]);
     }
+    //je recherche les livres selon leur genre
+    /**
+     * @Route("/admin/books/{name}", name="AdminSearchBooksGenre")
+     */
+    public function AdminSearchBooksGenre(
+        GenreRepository $genreRepository,
+        BookRepository $bookRepository,
+        $name
+    ){
+        //on récupère les livres selon le genre que l'on a entrée
+        //ici on récupère un seul genre avec findOneBy
+        $genre = $genreRepository ->findOneBy(['name'=> $name]);
+        //ici on récupère plusieurs livres qui correspondent au genre récupéré
+        $books = $bookRepository->findBy(['genre'=> $genre]);
+
+        //on retourne les infos récupérées
+        return $this->render('admin_books_genre.html.twig', [
+            'genre'=>$genre,
+            'books'=>$books
+        ]);
+    }
     //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
     //pour aller sur la page de suppression de livre ;

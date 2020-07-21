@@ -3,13 +3,15 @@
 
     <div class="block">
 
-        <div class="barre">
-            <ul class="genresList">
-                {% for genre in genres %}
-                    <li><a href="{{ path('AdminBooksGenre', {'id':books.genre.id}) }}">{{ books.genre.name }}</a></li>
-                {% endfor %}
-            </ul>
-        </div>
+    <div class="barre">
+        <ul class="genresList">
+
+            {% for genre in genres %}
+                <a href={{ path('AdminSearchBooksGenre', {'name':genre.name})}}  >{{ genre.name }}</a>
+            {% endfor %}
+
+        </ul>
+    </div>
 
         <div class="content">
             <div class="accueil">
