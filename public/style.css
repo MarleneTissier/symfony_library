@@ -146,10 +146,23 @@ h3{
 }
 /*les formulaires */
 
-.form{
+.form, .formLog{
     padding: 2%;
     width: 50%;
     margin: auto;
+}
+.formLog{
+    margin: auto;
+    width: 30%;
+    margin-top: 6%;
+    margin-bottom: 7%;
+}
+.formLog form{
+    display: flex;
+    flex-direction: column;
+}
+.formLog form input{
+    margin-bottom: 10%;
 }
 .form div{
     margin-bottom: 3%;
