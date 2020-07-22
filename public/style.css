@@ -222,7 +222,13 @@ input[type=button] {
     text-decoration: none;
     color: #222222;
 }
-
+.adminBook_img{
+    width: 100%;
+}
+.picture{
+    width: 70%;
+    margin: auto;
+}
 /*le footer : */
 footer{
     height: 15vh;

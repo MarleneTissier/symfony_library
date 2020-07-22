@@ -55,6 +55,11 @@ class Book
      */
     private $author;
 
+    /**
+     * @ORM\Column(type="string", length=500)
+     */
+    private $book_cover;
+
     /*
     public function __construct()
     {
@@ -159,6 +164,18 @@ class Book
     public function setAuthor(?author $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getBookCover(): ?string
+    {
+        return $this->book_cover;
+    }
+
+    public function setBookCover(string $book_cover): self
+    {
+        $this->book_cover = $book_cover;
 
         return $this;
     }
