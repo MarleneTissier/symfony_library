@@ -2,14 +2,18 @@
 namespace App\Controller;
 
 use App\Entity\Book;
+use App\Entity\User;
+use App\Form\UserType;
 use App\Repository\AuthorRepository;
 use App\Repository\BookRepository;
 use App\Repository\GenreRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use http\Env\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 
 class AuthorController extends AbstractController{
@@ -188,6 +192,35 @@ class AuthorController extends AbstractController{
         dump('livre supprimé');
         die;
     }
+//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
+    //route pour l'inscription
+    /**
+     * @route("/inscription", name="inscription")
+     */
+    public function inscription(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        UserRepository $userRepository
+    )
+    {
+        //nouvelle instance
+        $user = new User();
+        //recupération du gabarit de formulaire
+        $userForm = $this->createForm(UserType ::class, $user);
+        //je prends les données de la requete et je les envois au formulaire
+        $userForm->handleRequest($request);
+        //si le formulaire a ete envoyé et que les données sont valides...
+        if ($userForm->isSubmitted()&&$userForm->isValid()){
+            //... alors je persist et flush le livre
+            $entityManager->persist($user);
+            $entityManager->flush();
+            $this->addFlash('success', 'Merci de votre inscription');
+            return $this->redirectToRoute('userAccueil');
+        }
+        return $this->render('inscription.html.twig', [
+            'userForm'=>$userForm->createView()
+        ]);
+    }
 }
 

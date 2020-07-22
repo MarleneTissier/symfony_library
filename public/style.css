@@ -146,20 +146,27 @@ h3{
 }
 /*les formulaires */
 
-.form, .formLog{
+.form, .formLog, .formUser{
     padding: 2%;
     width: 50%;
     margin: auto;
 }
-.formLog{
+.formLog, .formUser{
     margin: auto;
     width: 30%;
     margin-top: 6%;
     margin-bottom: 7%;
 }
+.formUser form{
+    display: flex;
+    flex-direction: column
+}
 .formLog form{
     display: flex;
     flex-direction: column;
+}
+.formUser form input{
+    margin-bottom: 10%;
 }
 .formLog form input{
     margin-bottom: 10%;
@@ -167,7 +174,10 @@ h3{
 .form div{
     margin-bottom: 3%;
 }
+.formUser div{
+    margin-bottom: 3%;
 
+}
 label{
     color: #dfdfdf;
 }
@@ -228,6 +238,14 @@ input[type=button] {
 .picture{
     width: 70%;
     margin: auto;
+}
+/*inscription*/
+.demande_inscription{
+    padding: 2%;
+}
+.demande_inscription a{
+    text-decoration: none;
+    color: #dfdfdf;
 }
 /*le footer : */
 footer{
