@@ -281,7 +281,8 @@
         Request $request,
         BookRepository $bookRepository,
         EntityManagerInterface $entityManager,
-        $id
+        $id,
+        SluggerInterface $slugger
     ){
         //une nouvelle instance
         //dans laquelle on attribut le livre trouvé selon l'id
@@ -293,6 +294,43 @@
         $bookFormUpdate->handleRequest($request);
         //si le formulaire a ete envoyé et que les données sont valides...
         if ($bookFormUpdate->isSubmitted() && $bookFormUpdate->isValid()){
+            // vu que le champs bookCover de mon formulaire est en mapped false
+            // je gère moi même l'enregistrment de la valeur de cet input
+            // https://symfony.com/doc/current/controller/upload_file.html
+
+            // je récupère l'image uploadée
+            $bookCoverFile = $bookFormUpdate->get('bookCover')->getData();
+
+            // s'il y a bien une image uploadée dans le formulaire
+            if ($bookCoverFile){
+                //je récupère le nom de l'image
+                $originalCoverName=pathinfo($bookCoverFile->getClientOriginalName(), PATHINFO_FILENAME);
+
+                //et grace a son nom original, je génère un nouveau qui sera unique
+                //pour éviter d'avoir des doublons de noms d'images en BDD
+                $safeCOverName = $slugger->slug($originalCoverName);
+                $uniqueCoverName=$safeCOverName.'-'.uniqid().'.'.$bookCoverFile->guessExtension();
+
+                //j'utilise un bloc try and catch
+                //qui agit comme une condition, mais si le bloc try échoue, ça soulève une erreur grace au catch
+                try {
+                    // je prends l'image uploadée
+                    // et je la déplace dans un dossier (dans public) + je la renomme avec
+                    // le nom unique générée
+                    // j'utilise un parametre (défini dans services.yaml) pour savoir
+                    // dans quel dossier je la déplace
+                    // un parametre = une sorte de variable globale
+                    $bookCoverFile->move(
+                        $this->getParameter('book_cover_directory'),
+                        $uniqueCoverName
+                    );
+                }catch (FileException $e){
+                    return new Response(($e->getMessage()));
+                }
+
+                //je sauvegarde dans la colonne bookCover le nom de mon image
+                $book->setBookCover($uniqueCoverName);
+            }
             //... alors je persist et flush le livre
             $entityManager->persist($book);
             $entityManager->flush();

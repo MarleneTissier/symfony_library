@@ -26,9 +26,14 @@
             {{ form_errors(blocFormUpdate.genre)}}
         </div>
         <div class="book_author">
-            {{ form_label(bookForm.author) }}
-            {{ form_widget(bookForm.author, {'attr': {'class': 'input_author'}}) }}
-            {{ form_errors(bookForm.author)}}
+            {{ form_label(blocFormUpdate.author) }}
+            {{ form_widget(blocFormUpdate.author, {'attr': {'class': 'input_author'}}) }}
+            {{ form_errors(blocFormUpdate.author)}}
+        </div>
+        <div class="book_cover">
+            {{ form_label(blocFormUpdate.bookCover) }}
+            {{ form_widget(blocFormUpdate.bookCover, {'attr': {'class': 'input_cover'}}) }}
+            {{ form_errors(blocFormUpdate.bookCover)}}
         </div>
         <div class="book_resume">
             {{ form_label(blocFormUpdate.resume) }}

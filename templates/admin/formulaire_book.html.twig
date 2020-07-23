@@ -1,15 +1,12 @@
 {% extends 'admin/admin_base.html.twig' %}
 {% block content %}
 
-    {# afficher le formulaire
-    <div class="blocFormAjout">
-        {{ form(bookForm) }}
-    </div>
-    #}
     <h3>Ajouter un livre</h3>
-
     <div class="form">
+        {# afficher le formulaire
+        #}
         {{ form_start (bookForm) }}
+
             <div class="book_titre">
                 {{ form_label(bookForm.title) }}
                 {{ form_widget(bookForm.title, {'attr': {'class': 'input_title'}}) }}

@@ -15,6 +15,10 @@
                 <div class="book">
                     <!--le titre du livre-->
                     <h2>{{ book.title }}</h2>
+                    <!--l'image du livre-->
+                    <div class="picture">
+                        <img src="{{ asset('uploads/book/'~book.bookCover) }}" alt="" class="adminBook_img">
+                    </div>
                     <!--le résumé du livre-->
                     <p>{{ book.resume }}</p>
                     <!--les info du livre-->
