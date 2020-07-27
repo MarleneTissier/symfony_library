@@ -186,6 +186,8 @@
     /**
      * @route("/formulaire_book", name="formulaire_book")
      */
+    //en paramètre de la méthode se trouve la classe voulue
+    // suivie d'une variable dans laquelle je veux que Symfony m'instancie ma classe
     public function formulaire_book(
         Request $request,
         EntityManagerInterface $entityManager,
